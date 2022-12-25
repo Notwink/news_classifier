@@ -41,8 +41,10 @@ class Main(QtWidgets.QWidget):
             print(item.text())
             self.table.setItem(row, column, item)
             self.article_new.show()
+            self.article_new.print_article(item.text())
         except:
             print('empty cell')
+
 
     def form_news(self, news):
         rus_news = news[news['target'] == 1.0]
@@ -62,7 +64,7 @@ class Main(QtWidgets.QWidget):
         # news = pd.read_csv('../Data/True_lenta.csv', sep='\t', header=0)
             frame = pd.read_csv('../Data/Base.csv', sep='\t', header=0)
             print('Data loaded.') # NEW
-            frame = frame.dropna()[50:80]
+            frame = frame.dropna()[50:180]
         except:
             frame = pd.read_csv('../Data/VVST_cl.csv', sep='\t', header=0)
             print('Data loaded.') # NEW
@@ -91,8 +93,10 @@ class Article(QtWidgets.QWidget):
         form, base = loadUiType('./Article.ui')
         self.ui = form()
         self.ui.setupUi(self)
+        # self.print_article('a')
 
-        # loadUi("Article.ui", self)
+    def print_article(self, text):
+        self.ui.label.setText(text)
 
 
 if __name__ == '__main__':
